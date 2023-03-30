@@ -42,13 +42,9 @@ export default function FormComponent(props:any){
   } = props;
 
 
-  const handleTextChange = (value:string)=>{
+  const handleNameChange = (value: string) => {
+    value = value.replace(/[^a-zA-Z\s]/g, '');
     setCardName(value);
-    if( value.match(/^[a-zA-Z]+\s[a-zA-Z]+$/)){
-      return true;
-    }else{
-      return false;
-    }
   }
 
   const handleNumber = (value:string) =>{
@@ -76,8 +72,8 @@ export default function FormComponent(props:any){
         name={nameData.cardName.name}
         placeholder={nameData.cardName.placeholder}
         type={'text'}
-        // value={cardName}
-        onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{handleTextChange(e.target.value)}}
+        value={cardName}
+        onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{handleNameChange(e.target.value)}}
       />
       <Input 
         type={'text'}
