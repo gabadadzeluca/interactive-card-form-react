@@ -1,5 +1,4 @@
 import Input from "./input/Input";
-import { useRef } from "react";
 
 export default function FormComponent(props:any){
   const nameData = {
@@ -43,7 +42,7 @@ export default function FormComponent(props:any){
   } = props;
 
 
-  const handleTextChange = (value:string):boolean=>{
+  const handleTextChange = (value:string)=>{
     setCardName(value);
     if( value.match(/^[a-zA-Z]+\s[a-zA-Z]+$/)){
       return true;
@@ -51,16 +50,25 @@ export default function FormComponent(props:any){
       return false;
     }
   }
-  const handleNumChange = (value: string)=>{
-    if(value === ''){
-      setCardNum('')
-    }else{
-      if(value.match(/^\d+$/)){
-        setCardNum(value);
-      }
-      if(value.length  == 15) console.log('valid number')
+
+  const handleNumber = (value:string) =>{
+    // value = value.replace(/\s/g, "");
+    value = (value.replace(/[^0-9]+/g, ""));
+    if(value.length > 16){
+      return;
+    } else if (value.length > 4 && value.length < 8) {
+      value = value.replace(/(.{4})/g, "$1 ");
+    } else if (value.length > 8 && value.length < 12) {
+      value = value.replace(/(.{4})(.{4})/g, "$1 $2 ");
+    } else if (value.length > 12 && value.length < 16) {
+      value = value.replace(/(.{4})(.{4})(.{4})/g, "$1 $2 $3 ");
+    } else if (value.length == 16) {
+      value = value.replace(/(.{4})(.{4})(.{4})(.{4})/g, "$1 $2 $3 $4");
     }
+    setCardNum(value);
   }
+
+
 
   return(
     <div>
@@ -68,15 +76,15 @@ export default function FormComponent(props:any){
         name={nameData.cardName.name}
         placeholder={nameData.cardName.placeholder}
         type={'text'}
-        value={cardName}
+        // value={cardName}
         onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{handleTextChange(e.target.value)}}
       />
       <Input 
-        type={'number'}
+        type={'text'}
         name={nameData.cardNum.name}
         placeholder={nameData.cardNum.placeholder}
         value={cardNum}
-        onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{handleNumChange(e.target.value)}}
+        onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{handleNumber(e.target.value)}}
       />
     </div>
   )
