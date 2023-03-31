@@ -1,5 +1,6 @@
 import InputMask from 'react-input-mask';
 import Error from './Error';
+import styles from './FormComponent.module.css'
 
 export default function FormComponent(props:any){
   const nameData = {
@@ -36,7 +37,6 @@ export default function FormComponent(props:any){
     setShowError
   } = props;
 
-
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
     let value = e.target.value;
     value = value.replace(/[^a-zA-Z\s]/g, '');
@@ -58,6 +58,12 @@ export default function FormComponent(props:any){
     setExpYear(value);
   }
 
+  const handleCvc = (e: React.ChangeEvent<HTMLInputElement>):void =>{
+    setCvc(e.target.value);
+  }
+  
+  const messageOne = "Wrong Format";
+  const messageTwo = "Can't be blank"
 
   return(
     <div>
@@ -69,10 +75,11 @@ export default function FormComponent(props:any){
         type={'text'}
         value={cardName}
         onChange={(e)=>{handleNameChange(e)}}
+        className={cardName.length < 4 && showError ? styles.invalid : ''}
       />
       <Error 
-        condition={cardName == '' || !cardName}
-        message={"Can't be blank"}
+        condition={!cardName || cardName.length < 2}
+        message={cardName.length > 0 ? messageOne : messageTwo}
         show={showError}
       />
 
@@ -85,35 +92,71 @@ export default function FormComponent(props:any){
         placeholder={nameData.cardNum.placeholder}
         value={cardNum}
         onChange={(e)=>{handleNumber(e)}}
+        className={cardNum.length < 16 && showError ? styles.invalid : ''}
       />
       <Error 
-        condition={cardNum == '' || !cardNum}
-        message={"Can't be blank"}
+        condition={!cardNum || cardNum.length < 16}
+        message={cardNum.length > 0 ? messageOne : messageTwo}
         show={showError}
       />
+       <div className={styles.dateAndCvc}>
 
-      <div>
-        <label>{nameData.expDate.name}</label>
         <div>
+          <label>{nameData.expDate.name}</label>
+          <div>
+            {/* month input */}
+            <div>
+              <InputMask 
+                mask="99"
+                maskChar={''}
+                value={expMonth}
+                onChange={(e)=>handleMonth(e)}
+                id='month'
+                placeholder={nameData.expDate.placeholder1}
+                className={expMonth.length < 2 && showError ? styles.invalid : ''}
+              />
+              <Error 
+                condition={!expMonth || expMonth.length < 2}
+                message={expMonth.length > 0 ? messageOne : messageTwo}
+                show={showError}
+              />
+            </div>
+            {/* year input */}
+            <div>
+              <InputMask 
+                mask="99"
+                maskChar={''}
+                value={expYear}
+                onChange={(e)=>handleYear(e)}
+                id="year"
+                placeholder={nameData.expDate.placeholder2}
+                className={expYear.length < 2 && showError ? styles.invalid : ''}
+              />
+              <Error 
+                condition={!expYear || expYear.length < 2}
+                message={expYear.length > 0 ? messageOne : messageTwo}
+                show={showError}
+              />
+            </div>
+
+          </div>
+        </div>
+        
+        <div>
+          {/* cvc div */}
+          <label>{nameData.cvc.name}</label>
           <InputMask 
-            mask="99"
+            mask="999"
             maskChar={''}
-            value={expMonth}
-            onChange={(e)=>handleMonth(e)}
-            id='month'
-            placeholder={nameData.expDate.placeholder1}
-          />
-          <InputMask 
-            mask="99"
-            maskChar={''}
-            value={expYear}
-            onChange={(e)=>handleYear(e)}
-            id="year"
-            placeholder={nameData.expDate.placeholder2}
+            placeholder={nameData.cvc.placeholder}
+            value={cvc}
+            onChange={e=>handleCvc(e)}
+            className={cvc.length < 3 && showError ? styles.invalid : ''}
+            minLength={3}
           />
           <Error 
-            condition={!expYear || !expMonth || expMonth=='' || expYear == ''}
-            message={"Can't be blank"}
+            condition={!cvc || cvc.length < 3}
+            message={cvc.length > 0 ? messageOne : messageTwo}
             show={showError}
           />
         </div>
