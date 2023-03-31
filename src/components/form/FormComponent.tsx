@@ -1,5 +1,5 @@
-import { validateHeaderName } from 'http';
 import InputMask from 'react-input-mask';
+import Error from './Error';
 
 export default function FormComponent(props:any){
   const nameData = {
@@ -27,40 +27,35 @@ export default function FormComponent(props:any){
     cardNum,
     cardName,
     cvc,
-    billingAddress,
-    numberValid,
-    cvcValid,
-    nameValid,
+    showError,
     setExpMonth,
     setExpYear,
     setCardName,
     setCardNum,
     setCvc,
-    setBillingAddress,
-    setNumberValid,
-    setCvcValid,
-    setNameValid
+    setShowError
   } = props;
 
 
-  const handleNameChange = (value: string):void => {
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    let value = e.target.value;
     value = value.replace(/[^a-zA-Z\s]/g, '');
     setCardName(value);
   }
 
-  const handleNumber = (value:string):void => {
-    setCardNum(value.replace(/[^0-9]+/g, ""));
+  const handleNumber = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    setCardNum(e.target.value.replace(/[^0-9]+/g, ""));
   }
 
-  const handleMonth = (value:string):void => {
-    setExpMonth(value.replace(/1[3-9]|[2-9][0-9]/, "12").substring(0, 2));
+  const handleMonth = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    setExpMonth(e.target.value.replace(/1[3-9]|[2-9][0-9]/, "12").substring(0, 2));
   };
 
-  const handleYear = (value: string):void => {
+  const handleYear = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    let value = e.target.value;
     const currentYear = new Date().getFullYear().toString().substring(2);
     if(parseInt(value[0]) < parseInt(currentYear[0])) return;
-    else if(parseInt(value) < parseInt(currentYear)) return;
-    setExpYear(value.substring(0,2));
+    setExpYear(value);
   }
 
 
@@ -73,11 +68,15 @@ export default function FormComponent(props:any){
         placeholder={nameData.cardName.placeholder}
         type={'text'}
         value={cardName}
-        onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{handleNameChange(e.target.value)}}
+        onChange={(e)=>{handleNameChange(e)}}
+      />
+      <Error 
+        condition={cardName == '' || !cardName}
+        message={"Can't be blank"}
+        show={showError}
       />
 
       <label>{nameData.cardNum.name}</label>
-
       <InputMask
         mask="9999 9999 9999 9999" 
         type={'text'}
@@ -85,27 +84,46 @@ export default function FormComponent(props:any){
         name={nameData.cardNum.name}
         placeholder={nameData.cardNum.placeholder}
         value={cardNum}
-        onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{handleNumber(e.target.value)}}
+        onChange={(e)=>{handleNumber(e)}}
       />
+      <Error 
+        condition={cardNum == '' || !cardNum}
+        message={"Can't be blank"}
+        show={showError}
+      />
+
       <div>
         <label>{nameData.expDate.name}</label>
-        <InputMask 
-          mask="99"
-          maskChar={''}
-          value={expMonth}
-          onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleMonth(e.target.value)}
-          id='month'
-          placeholder={nameData.expDate.placeholder1}
-        />
-        <InputMask 
-          mask="99"
-          maskChar={''}
-          value={expYear}
-          onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleYear(e.target.value)}
-          id="year"
-          placeholder={nameData.expDate.placeholder2}
-        />
+        <div>
+          <InputMask 
+            mask="99"
+            maskChar={''}
+            value={expMonth}
+            onChange={(e)=>handleMonth(e)}
+            id='month'
+            placeholder={nameData.expDate.placeholder1}
+          />
+          <InputMask 
+            mask="99"
+            maskChar={''}
+            value={expYear}
+            onChange={(e)=>handleYear(e)}
+            id="year"
+            placeholder={nameData.expDate.placeholder2}
+          />
+          <Error 
+            condition={!expYear || !expMonth || expMonth=='' || expYear == ''}
+            message={"Can't be blank"}
+            show={showError}
+          />
+        </div>
       </div>
+
+      <button 
+        onClick={()=>setShowError(true)}
+      >
+        Submit
+      </button>
     </div>
   )
 }
