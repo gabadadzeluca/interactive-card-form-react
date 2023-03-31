@@ -1,9 +1,11 @@
 import styles from './Cards.module.css';
 
-export default function CardTwo(){
+export default function CardTwo(props:{
+  cvc:string
+}){
   return (
     <div className={styles.cardTwo}>
-      <p>props.cvv</p>
+      <p>{props.cvc ? props.cvc : '000'}</p>
     </div>
   )
 }
