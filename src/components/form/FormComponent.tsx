@@ -2,7 +2,22 @@ import InputMask from 'react-input-mask';
 import Error from './Error';
 import styles from './FormComponent.module.css'
 
-export default function FormComponent(props:any){
+interface formData{
+  expMonth:string;
+  expYear: string;
+  cardNum:string;
+  cardName:string;
+  cvc:string;
+  showError:boolean;
+  setExpMonth: (value: string)=>void;
+  setExpYear: (value: string)=>void;
+  setCardName: (value: string)=>void;
+  setCardNum: (value: string)=>void;
+  setCvc: (value: string)=>void;
+  setShowError: (value: boolean)=>void;
+}
+
+export default function FormComponent(props:formData){
   const nameData = {
     cardName:{
       name: 'CARDHOLDER NAME',
