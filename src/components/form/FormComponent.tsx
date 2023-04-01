@@ -9,12 +9,14 @@ interface formData{
   cardName:string;
   cvc:string;
   showError:boolean;
+  submitted: boolean;
   setExpMonth: (value: string)=>void;
   setExpYear: (value: string)=>void;
   setCardName: (value: string)=>void;
   setCardNum: (value: string)=>void;
   setCvc: (value: string)=>void;
   setShowError: (value: boolean)=>void;
+  setSubmitted: (value: boolean)=>void;
 }
 
 export default function FormComponent(props:formData){
@@ -44,12 +46,14 @@ export default function FormComponent(props:formData){
     cardName,
     cvc,
     showError,
+    submitted,
     setExpMonth,
     setExpYear,
     setCardName,
     setCardNum,
     setCvc,
-    setShowError
+    setShowError,
+    setSubmitted
   } = props;
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
@@ -75,6 +79,16 @@ export default function FormComponent(props:formData){
 
   const handleCvc = (e: React.ChangeEvent<HTMLInputElement>):void =>{
     setCvc(e.target.value);
+  }
+  
+  const handleSubmit = ():void =>{
+    if(cardNum.length == 16 && cardName && expMonth.length == 2 && expYear.length == 2 && cvc.length == 3){
+      setSubmitted(true);
+      console.log("FORM WAS SUBMITTED");
+    }else{
+      setShowError(true);
+      setSubmitted(false);
+    }
   }
   
   const messageOne = "Wrong Format";
@@ -178,7 +192,7 @@ export default function FormComponent(props:formData){
       </div>
 
       <button 
-        onClick={()=>setShowError(true)}
+        onClick={handleSubmit}
       >
         Submit
       </button>
