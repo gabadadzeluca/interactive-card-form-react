@@ -10,13 +10,12 @@ interface displayData{
 }
 
 export default function CardContainerComponent(props: displayData){
-	const{expMonth,expYear, cardName, cardNum, cvc} = props;
 	return(
 		<div>
 			<CardOne 
 				{...props}
 			/>
-			<CardTwo cvc={cvc}/>
+			<CardTwo cvc={props.cvc}/>
 		</div>	
 	)
 }
