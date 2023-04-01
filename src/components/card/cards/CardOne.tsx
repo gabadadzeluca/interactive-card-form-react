@@ -18,7 +18,7 @@ export default function CardOne(props:{
           {cardNum ? formattedCardNum : '0000 0000 0000 0000'}
         </p>
         <div>
-          <p>{cardName ? cardName : 'Name Surname'}</p>
+          <p>{cardName ? cardName.toUpperCase() : 'Name Surname'}</p>
           <p>
             <span>
               {expMonth ? expMonth : '00'}
