@@ -5,7 +5,7 @@ export default function CardTwo(props:{
 }){
   return (
     <div className={styles.cardTwo}>
-      <p>{props.cvc ? props.cvc : '000'}</p>
+      <p className={styles.cvc}>{props.cvc ? props.cvc : '000'}</p>
     </div>
   )
 }

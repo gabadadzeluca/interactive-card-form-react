@@ -12,13 +12,14 @@ export default function CardOne(props:{
     <div className={styles.cardOne}>
       <div>
         {/* div for some circles */}
+        <div className={styles.circle}></div>
       </div>
-      <div>
-        <p>
+      <div className={styles.cardInfo}>
+        <p className={styles.cardNum}>
           {cardNum ? formattedCardNum : '0000 0000 0000 0000'}
         </p>
-        <div>
-          <p>{cardName ? cardName.toUpperCase() : 'Name Surname'}</p>
+        <div className={styles.nameAndDateDiv}>
+          <p>{cardName ? cardName.toUpperCase() : 'JANE APPLESEED'}</p>
           <p>
             <span>
               {expMonth ? expMonth : '00'}
