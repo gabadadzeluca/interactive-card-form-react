@@ -1,5 +1,5 @@
 import InputMask from 'react-input-mask';
-import Error from './Error';
+import Error from './error/Error';
 import styles from './FormComponent.module.css'
 
 interface formData{
@@ -95,7 +95,7 @@ export default function FormComponent(props:formData){
   const messageTwo = "Can't be blank"
 
   return(
-    <div>
+    <div className={styles.formContainer}>
       <label>{nameData.cardName.name}</label>
       <input
         maxLength={25}
@@ -128,11 +128,11 @@ export default function FormComponent(props:formData){
         message={cardNum.length > 0 ? messageOne : messageTwo}
         show={showError}
       />
-       <div className={styles.dateAndCvc}>
+      <div className={styles.dateAndCvc}>
 
-        <div>
+        <div className={styles.dateDiv}>
           <label>{nameData.expDate.name}</label>
-          <div>
+          <div className={styles.dateInputsDiv}>
             {/* month input */}
             <div>
               <InputMask 
@@ -171,8 +171,7 @@ export default function FormComponent(props:formData){
           </div>
         </div>
         
-        <div>
-          {/* cvc div */}
+        <div className={styles.cvcDiv}>
           <label>{nameData.cvc.name}</label>
           <InputMask 
             mask="999"
@@ -193,8 +192,9 @@ export default function FormComponent(props:formData){
 
       <button 
         onClick={handleSubmit}
+        className={styles.submitBtn}
       >
-        Submit
+        Confirm
       </button>
     </div>
   )

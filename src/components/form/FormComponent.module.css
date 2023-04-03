@@ -1,0 +1,60 @@
+.invalid{
+  border: 0.1px solid red;
+}
+.invalid:focus{
+  border: 0.1px solid red;
+  outline: none;
+}
+
+.formContainer{
+  width: 90%;
+  height: 60%;
+  margin: 4rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 2.5rem;
+}
+
+.formContainer label{
+  color: #21092F;
+  font-size: 1.2rem;
+  letter-spacing: 0.2rem;
+  margin-bottom: 1rem;
+}
+
+.dateAndCvc{
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dateAndCvc>div{
+  width: 50%;
+}
+
+.dateDiv{
+  display: flex;
+  flex-direction: column;
+}
+.dateInputsDiv{
+  display: inline-flex;
+  align-items: center;
+}
+.dateInputsDiv>div{
+  width: 50%;
+}
+.dateInputsDiv input{
+  width: 90%;
+}
+
+.cvcDiv{
+  display: flex;
+  flex-direction: column;
+}
+
+.submitBtn{
+  background-color: #21092F;
+  color: white;
+  height: 5.3rem;
+  font-size: 1.8rem;
+}
