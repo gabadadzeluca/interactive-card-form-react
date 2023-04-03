@@ -1,0 +1,24 @@
+.finalScreen{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 40%;
+  margin-top: 3rem;
+}
+.finalScreen>img{
+  width: 8rem;
+  height: 8rem;
+}
+.finalScreen>button{
+  color: white;
+  background-color: #21092F;
+}
+.finalScreen>h3{
+  font-size: 2.8rem;
+  letter-spacing: 0.5rem;
+}
+.finalScreen>p{
+  color: #8F8694;
+  font-size: 1.8rem;
+}
