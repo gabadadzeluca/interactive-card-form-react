@@ -22,3 +22,12 @@
   color: #8F8694;
   font-size: 1.8rem;
 }
+
+@media screen and (min-width: 1200px) {
+  .finalScreen{
+    align-self: center;
+    justify-self: center;
+    width: 30%;
+    margin-left: 20%;
+  }
+}

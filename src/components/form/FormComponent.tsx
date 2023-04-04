@@ -59,7 +59,7 @@ export default function FormComponent(props:formData){
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
     let value = e.target.value;
     value = value.replace(/[^a-zA-Z\s]/g, '');
-    setCardName(value);
+    setCardName(value.toUpperCase());
   }
 
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement>):void => {
@@ -131,7 +131,7 @@ export default function FormComponent(props:formData){
       <div className={styles.dateAndCvc}>
 
         <div className={styles.dateDiv}>
-          <label>{nameData.expDate.name}</label>
+          <label className={styles.label}>{nameData.expDate.name}</label>
           <div className={styles.dateInputsDiv}>
             {/* month input */}
             <div>
@@ -172,7 +172,7 @@ export default function FormComponent(props:formData){
         </div>
         
         <div className={styles.cvcDiv}>
-          <label>{nameData.cvc.name}</label>
+          <label className={styles.label}>{nameData.cvc.name}</label>
           <InputMask 
             mask="999"
             maskChar={''}
