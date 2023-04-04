@@ -10,13 +10,7 @@ This is a solution to the [Interactive card details form challenge on Frontend M
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -33,13 +27,13 @@ Users should be able to:
 
 ### Screenshot
 
-![](../card-form/src/images/screenshot.png)
+![](./src/images/screenshot.png)
 
 
 ### Links
 
 - Solution URL: [GitHub](https://github.com/gabadadzeluca/interactive-card-form-react)
-- Live Site URL: [Live URL]()
+- Live Site URL: [Live URL](https://gabadadzeluca.github.io/interactive-card-form-react/)
 
 ## My process
 
@@ -53,5 +47,7 @@ Users should be able to:
 
 
 ## Author
+
+- LinkedIn - [Luca Gabadadze](https://www.linkedin.com/in/luca-gabadadze-6068b324a/)
 
 
